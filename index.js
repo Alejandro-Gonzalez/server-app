@@ -39,6 +39,7 @@ app.get('/texts', (req, res, next) => {
     TextModel.find((err, texts) => {
         if (err) return console.error(err);
         // myCache.set('texts', texts, 5000);
+        console.log(texts)
         res.json(texts);
     })
 });

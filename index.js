@@ -43,7 +43,7 @@ app.get('/texts', (req, res, next) => {
     })
 });
 
-app.get('/', (res) => {
+app.get('/', (req, res) => {
   res.send("hello")
 });
 

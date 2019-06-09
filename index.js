@@ -33,12 +33,12 @@ app.get('/texts', (req, res, next) => {
     if(header && header === process.env.HEADER_VALUE) return next();
     return res.status(403).send('UNAUTHORIZED');
   }, (req, res) => {
-    const data = myCache.get('texts');
-    if(data) return res.json(data);
+    // const data = myCache.get('texts');
+    // if(data) return res.json(data);
 
     TextModel.find((err, texts) => {
         if (err) return console.error(err);
-        myCache.set('texts', texts, 5000);
+        // myCache.set('texts', texts, 5000);
         res.json(texts);
     })
 });

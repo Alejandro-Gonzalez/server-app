@@ -35,7 +35,10 @@ app.get('/texts', (req, res, next) => {
     return res.status(403).send('UNAUTHORIZED');
   }, (req, res) => {
     const data = myCache.get('texts');
-    if(data) return res.json(data);
+    if(data) {
+		console.log("data cached")
+		return res.json(data);
+	}
 
     TextModel.find((err, texts) => {
         if (err) return console.error(err);

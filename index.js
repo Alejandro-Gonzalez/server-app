@@ -30,16 +30,16 @@ var TextModel = mongoose.model('TextModel', TextSchema);
 
 app.get('/texts', (req, res, next) => {
     const header = req.headers[process.env.HEADER_NAME];
-    if(header && header === process.env.HEADER_VALUE) return next();
+    if(header && header === process.env.HEADER_VALUE)
+    	return next();
     return res.status(403).send('UNAUTHORIZED');
   }, (req, res) => {
-    // const data = myCache.get('texts');
-    // if(data) return res.json(data);
+    const data = myCache.get('texts');
+    if(data) return res.json(data);
 
     TextModel.find((err, texts) => {
         if (err) return console.error(err);
-        // myCache.set('texts', texts, 5000);
-        console.log(texts)
+        if (texts.length) myCache.set('texts', texts, 5000);
         res.json(texts);
     })
 });
